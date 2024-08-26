@@ -1,6 +1,7 @@
 
 const initialState = {
-    contactList: [] // 초기값을 빈 배열로 설정
+    contactList: [], // 초기값을 빈 배열로 설정
+    searchList: []
   };
 
   //중복여부 확인
@@ -29,8 +30,18 @@ function reducer(state=initialState,action){
         }else{
             return {...state,contactList:[...state.contactList,{name:payload.name,phoneNumber:payload.phoneNumber}]};
         }
-            default: return { ...state };
-    }
-}
+         case "Submit-Name":
+            const searchResults = state.contactList.filter(contact =>
+                contact.name.includes(payload.keyword) || contact.phoneNumber.includes(payload.keyword)
+              );
+              return {
+                ...state,
+                searchList: searchResults // 검색 결과를 searchList에 저장
+              };
+        
+            default:
+              return state;
+          }
+        }
 
 export default reducer;

@@ -27,7 +27,7 @@ const Information = () => {
           <Numberbox key={index} item={item} />
         ))
       ) : (
-        <p>찾지 못했습니다</p>
+        <p>검색하세요.</p>
       )}
     </div>
     {showAllResults && (
